@@ -5,10 +5,12 @@ import { DatabaseModule } from 'src/common/database/database.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { LocalStrategy } from 'src/common/security/local.strategy';
+import { JwtStrategy } from 'src/common/security/jwt.strategy';
+import { UserMapper } from 'src/user/user.mapper';
 
 @Module({
   controllers: [AuthController],
-  providers: [AuthService, LocalStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy, UserMapper],
   imports: [
     DatabaseModule,
     JwtModule.registerAsync({
