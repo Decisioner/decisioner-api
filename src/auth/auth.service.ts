@@ -4,10 +4,15 @@ import { UserRepository } from 'src/common/database/repositories/user.repository
 import { AlreadyRegisteredException } from 'src/common/exceptions/already-registered.exception';
 import { InvalidEntityIdException } from 'src/common/exceptions/invalid-entity-id.exception';
 import { UserDto } from 'src/user/dtos/user.dto';
+import { User } from '@prisma/client';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(
+    private readonly userRepository: UserRepository,
+    private readonly jwtService: JwtService
+  ) {}
 
   async validateUser(username: string, password: string) {
     const user = await this.userRepository.find({
@@ -43,6 +48,10 @@ export class AuthService {
     });
   }
 
+  async login(user: User) {
+    return this.getAccessToken(user.id);
+  }
+
   async checkPassword(password: string, hash: string) {
     return bcrypt.compare(password, hash);
   }
@@ -50,5 +59,12 @@ export class AuthService {
   private async hashPassword(password: string) {
     const salt = await bcrypt.genSalt();
     return bcrypt.hash(password, salt);
+  }
+
+  private getAccessToken(userId: string) {
+    const payload = { sub: userId };
+    return {
+      accessToken: this.jwtService.sign(payload),
+    };
   }
 }
