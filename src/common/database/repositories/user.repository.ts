@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
-import { Prisma } from '@prisma/client';
-import { User } from '../entities/user';
+import { Prisma, User } from '@prisma/client';
 
 @Injectable()
 export class UserRepository {
@@ -13,5 +12,11 @@ export class UserRepository {
 
   async find(where: Prisma.UserWhereInput): Promise<User> {
     return this.prismaService.user.findFirst({ where });
+  }
+
+  findById(id: string) {
+    return this.prismaService.user.findFirst({
+      where: { id },
+    });
   }
 }
