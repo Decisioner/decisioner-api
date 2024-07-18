@@ -37,7 +37,6 @@ module.exports = {
     'func-call-spacing': 'error',
     'rest-spread-spacing': 'error',
     'object-curly-spacing': ['error', 'always'],
-    indent: ['error', 2],
     'key-spacing': 'error',
     'keyword-spacing': 'error',
     'new-parens': 'error',
