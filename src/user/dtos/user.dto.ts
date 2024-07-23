@@ -30,10 +30,12 @@ export class UserDto {
   @MaxLength(50, validationOptionsMsg('Full name is too long (max: 50)'))
   fullName: string;
 
+  @MinLength(8, validationOptionsMsg('Password is too short (min: 8)'))
+  @MaxLength(50, validationOptionsMsg('Password is too long (max: 50)'))
   @Matches(
     /^(?=.*[A-Za-z])(?=.*\d).+$/,
     validationOptionsMsg(
-      'The password must be between 8 and 50 characters long, include at least 1 digit and 1 letter'
+      'The password must include at least 1 digit and 1 letter'
     )
   )
   @IsNotEmpty(validationOptionsMsg('Password cannot be empty'))
