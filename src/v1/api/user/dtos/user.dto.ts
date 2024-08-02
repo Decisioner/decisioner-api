@@ -9,7 +9,7 @@ import {
   ENG_REGEX,
   NUM_REGEX,
   validationOptionsMsg,
-} from 'src/common/utils/GLOBAL';
+} from 'src/v1/common/utils/GLOBAL';
 
 export class UserDto {
   @IsNotEmpty(validationOptionsMsg('Username cannot be empty'))

@@ -1,11 +1,11 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { UserRepository } from 'src/common/database/repositories';
+import { UserRepository } from 'src/v1/common/database/repositories';
 import {
   AlreadyRegisteredException,
   InvalidEntityIdException,
-} from 'src/common/exceptions';
-import { UserDto } from 'src/user/dtos/user.dto';
+} from 'src/v1/common/exceptions';
+import { UserDto } from 'src/v1/api/user/dtos/user.dto';
 import { User } from '@prisma/client';
 import { JwtService } from '@nestjs/jwt';
 
